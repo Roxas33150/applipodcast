@@ -11,9 +11,6 @@ catch (PDOException $e){
 
 $query = "SELECT * FROM podcast WHERE animateur_id = \"".$_GET["id"]."\"";
 $r = $connection->query( $query )->fetchAll(PDO::FETCH_ASSOC);
-/*echo '<pre>';
-var_dump($r);
-echo '</pre>';*/
 
 foreach ($r as $row) {
 	echo "<a href =\"".$row["lien"]."\">".$row['titre']."</a>"."</br>";
