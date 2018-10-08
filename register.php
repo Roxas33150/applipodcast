@@ -1,0 +1,151 @@
+<?php session_start();?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ondes Palmer</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Oswald:400,500" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top"><!--DEBUT DE LA NAVBAR-->
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    	<ul class="nav navbar-nav">
+	    	
+    		<li><a href="index.php" class="pages">Accueil</a></li>
+	        <li><a href="podcast.php" class="pages">Les podcasts</a></li>
+	        <li><a href="nous.php" class="pages">Qui sommes-nous ?</a></li>
+	        <li><a href="contact.php" class="pages">Contact</a></li>
+        </ul>
+      
+      	<form method="GET" class="navbar-form navbar-right">
+       		<div class="form-group">
+          		<input type="search" class="form-control" name="recherche" placeholder="Recherche..." />
+        	</div>
+        		<button type="submit"  class="btn btn-default">Valider</button>
+        </form>
+
+
+    </div><!-- FIN DE LA NAVBAR -->
+  </div><!-- /.container-fluid -->
+</nav>
+                         
+<div class="container corps"><!-- début container-->
+		<br/>
+		<br/>
+			<div class="row"><!--début row bandeau-->
+				<div class="col-md-12"><!--image bandeau-->
+					<img src="img/bgfinal.jpg" class="img-responsive">
+				</div><!--fin image bandeau-->
+			</div><!--fin row bandeau-->
+
+		</br>
+		</br>
+
+<center>
+
+<form method="post" action="">
+
+    <legend>S'inscrire sur le site</legend>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Login</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" name="login" placeholder="Login">
+      </div>
+    </div><br/><br/><br/>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Mot de passe</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" name="password" placeholder="Mot de passe">
+      </div>
+    </div>
+
+<br/><br/><center><button type="submit" name="submit" class="btn btn-primary">S'Inscrire</button></center>
+</form>
+
+
+<?php
+//Connexion à la BDD
+  try
+    {
+    
+     $bdd = new PDO ('mysql:host=localhost;dbname=podcastradio', 'root', 'root');
+    
+    }
+  
+  catch(Exception $e)
+    {
+     die('Erreur :'.$e->getMessage());
+    }
+  
+    if(ISSET($_POST['submit']))
+    {
+
+
+      //On créer les variables
+      $login =   $_POST['login'];
+      $password = $_POST['password'];
+      $password = hash("sha256", $password);
+
+
+
+
+      $req = $bdd->prepare('INSERT INTO membre(login, password) VALUES (:login, :password)');
+
+
+      $req->execute(array("login" => $login, "password" => $password));
+
+
+      if(!empty($login) && !empty($password))
+      {
+
+
+      }else{
+      ?>
+
+
+      <b>Pseudo ou MDP vide !</b>
+
+
+      <?php
+      }
+
+
+      if(empty($login) && empty($password))
+      {
+
+
+      }else{
+        $_SESSION['login'] = $login;
+      
+      echo '<div class="alert alert-dismissable alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Félicitations tu es inscris, quel talent !</strong> Tu vas être redirigé sur la page pour te connecter dans 5 secondes ! <meta http-equiv="refresh" content="5; URL=login.php">
+  </div>';
+
+
+      }
+
+
+    }
+   
+   ?>

@@ -1,0 +1,68 @@
+h1 {
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+}
+
+h2 {
+	color: #353535;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+}
+
+body {
+	background-color: #353535;
+	height: 100%;
+}
+
+html {
+	height: 100%;
+}
+
+.navigation {
+	background-color: grey;
+}
+
+.bg {
+	background-image: url("img/bgfinal.jpg");
+	height: 50%;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrong {
+	color: red;
+}
+
+.rech {text-align: right;}
+
+.corps {
+	background-color: white;
+	min-height: 100%;
+}
+
+.iconelogin {
+	font-size: 20px;
+}
+
+
+
+
+
+.youtube {
+	width: auto;
+}
+
+.partenaires {
+	width: 100%;
+}
+
+.menu {
+	margin-top: -67px;
+	color: white;
+}
+
+a.liens {
+	color: white;
+	text-decoration: none;
+}
